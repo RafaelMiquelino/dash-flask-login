@@ -1,10 +1,15 @@
-#Dash app initialization
+# Dash app initialization
 import dash
+# User management initialization
+import os
+from flask_login import LoginManager, UserMixin
+from users_mgt import db, User as base
+from config import config
+
 
 app = dash.Dash(
     __name__,
-    meta_tags=
-    [
+    meta_tags=[
         {
             'charset': 'utf-8',
         },
@@ -19,32 +24,26 @@ app.config.suppress_callback_exceptions = True
 app.css.config.serve_locally = True
 app.scripts.config.serve_locally = True
 
-#User management initialization
-import os
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask_sqlalchemy  import SQLAlchemy
 
 # config
 server.config.update(
-    SECRET_KEY = os.urandom(12),
-    SQLALCHEMY_DATABASE_URI = "",
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY=os.urandom(12),
+    SQLALCHEMY_DATABASE_URI=config.get('database', 'con'),
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
 )
 
-db = SQLAlchemy(server)
+db.init_app(server)
 
 # Setup the LoginManager for the server
 login_manager = LoginManager()
 login_manager.init_app(server)
 login_manager.login_view = '/login'
 
+
 # Create User class with UserMixin
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(15), unique=True)
-    email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(80))
-    profile = db.Column(db.String(15))
+class User(UserMixin, base):
+    pass
+
 
 # callback to reload the user object
 @login_manager.user_loader

@@ -3,7 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-from server import _, app
+from server import app
 
 # Create app layout
 layout = html.Div(children=[
@@ -19,7 +19,7 @@ layout = html.Div(children=[
                             className="ten columns",
                             children=[
                                 html.Br(),
-                                html.Div(_('User non authenticated - Please login to view the dashboard')),
+                                html.Div('User non authenticated - Please login to view the success screen'),
                             ]
                         ),
                         html.Div(
@@ -27,7 +27,7 @@ layout = html.Div(children=[
                             # children=html.A(html.Button('LogOut'), href='/')
                             children=[
                                 html.Br(),
-                                html.Button(id='back-button', children=_('Go back'), n_clicks=0)
+                                html.Button(id='back-button', children='Go back', n_clicks=0)
                             ]
                         )
                     ]

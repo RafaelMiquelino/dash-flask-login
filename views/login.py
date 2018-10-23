@@ -2,7 +2,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
-from server import _, app, login_user, User
+from server import app, User
+from flask_login import login_user
 from werkzeug.security import check_password_hash
 
 layout = html.Div(
@@ -11,17 +12,17 @@ layout = html.Div(
             className="container",
             children=[
                 dcc.Location(id='url_login', refresh=True),
-                html.Div(_('''Please log in to continue:'''), id='h1'),
+                html.Div('''Please log in to continue:''', id='h1'),
                 html.Div(
                     # method='Post',
                     children=[
                         dcc.Input(
-                            placeholder=_('Enter your username'),
+                            placeholder='Enter your username',
                             type='text',
                             id='uname-box'
                         ),
                         dcc.Input(
-                            placeholder=_('Enter your password'),
+                            placeholder='Enter your password',
                             type='password',
                             id='pwd-box'
                         ),
@@ -44,12 +45,12 @@ layout = html.Div(
               [Input('login-button', 'n_clicks')],
               [State('uname-box', 'value'),
                State('pwd-box', 'value')])
-def open_dashboard(n_clicks, input1, input2):
+def sucess(n_clicks, input1, input2):
     user = User.query.filter_by(username=input1).first()
     if user:
         if check_password_hash(user.password, input2):
             login_user(user)
-            return '/alicedash'
+            return '/success'
         else:
             pass
     else:
@@ -67,8 +68,8 @@ def update_output(n_clicks, input1, input2):
             if check_password_hash(user.password, input2):
                 return ''
             else:
-                return _('Incorrect username or password')
+                return 'Incorrect username or password'
         else:
-            return _('Incorrect username or password')
+            return 'Incorrect username or password'
     else:
         return ''

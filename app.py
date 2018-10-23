@@ -1,9 +1,10 @@
 # index page
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output
 
-from server import app, server, LoginManager, UserMixin, login_user, login_required, logout_user, current_user, load_user, User
+from server import app, server
+from flask_login import logout_user, current_user
 from views import success, login, login_fd, logout
 
 header = html.Div(
@@ -37,6 +38,7 @@ app.layout = html.Div(
     ]
 )
 
+
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
@@ -58,23 +60,27 @@ def display_page(pathname):
     else:
         return '404'
 
+
 @app.callback(
     Output('user-name', 'children'),
     [Input('page-content', 'children')])
 def cur_user(input1):
     if current_user.is_authenticated:
-        return html.Div(_('Current user: ')+current_user.username)# 'User authenticated' return username in get_id()
+        return html.Div('Current user: ' + current_user.username)
+        # 'User authenticated' return username in get_id()
     else:
         return ''
+
 
 @app.callback(
     Output('logout', 'children'),
     [Input('page-content', 'children')])
-def cur_user(input1):
+def user_logout(input1):
     if current_user.is_authenticated:
         return html.A('Logout', href='/logout')
     else:
         return ''
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

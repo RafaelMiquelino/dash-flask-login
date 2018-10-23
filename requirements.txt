@@ -4,13 +4,13 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-certifi==2018.8.24        # via requests
+certifi==2018.10.15       # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via flask
-dash-core-components==0.33.0
+dash-core-components==0.35.0
 dash-html-components==0.13.2
 dash-renderer==0.14.3     # via dash
-dash==0.28.2
+dash==0.28.5
 decorator==4.3.0          # via plotly, traitlets
 flask-compress==1.4.0     # via dash
 flask-login==0.4.1
@@ -18,7 +18,7 @@ flask-sqlalchemy==2.3.2
 flask==1.0.2              # via dash, flask-compress, flask-login, flask-sqlalchemy
 idna==2.7                 # via requests
 ipython-genutils==0.2.0   # via nbformat, traitlets
-itsdangerous==0.24        # via flask
+itsdangerous==1.0.0       # via flask
 jinja2==2.10              # via flask
 jsonschema==2.6.0         # via nbformat
 jupyter-core==4.4.0       # via nbformat
@@ -26,10 +26,10 @@ markupsafe==1.0           # via jinja2
 nbformat==4.4.0           # via plotly
 plotly==3.3.0             # via dash
 pytz==2018.5              # via plotly
-requests==2.19.1          # via plotly
+requests==2.20.0          # via plotly
 retrying==1.3.3           # via plotly
 six==1.11.0               # via plotly, retrying, traitlets
 sqlalchemy==1.2.12
 traitlets==4.3.2          # via jupyter-core, nbformat
-urllib3==1.23             # via requests
+urllib3==1.24             # via requests
 werkzeug==0.14.1
