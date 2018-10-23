@@ -2,14 +2,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
-from server import _, app, server, LoginManager, UserMixin, login_user, login_required, logout_user, current_user, load_user, User
+from server import _, app, login_user, User
 from werkzeug.security import check_password_hash
 
-layout =html.Div(
+layout = html.Div(
     children=[
         html.Div(
             className="container",
-            children = [
+            children=[
                 dcc.Location(id='url_login', refresh=True),
                 html.Div(_('''Please log in to continue:'''), id='h1'),
                 html.Div(
@@ -31,13 +31,14 @@ layout =html.Div(
                             type='submit',
                             id='login-button'
                         ),
-                        html.Div(children='',id='output-state')
+                        html.Div(children='', id='output-state')
                     ]
                 ),
             ]
         )
     ]
 )
+
 
 @app.callback(Output('url_login', 'pathname'),
               [Input('login-button', 'n_clicks')],
@@ -49,8 +50,11 @@ def open_dashboard(n_clicks, input1, input2):
         if check_password_hash(user.password, input2):
             login_user(user)
             return '/alicedash'
-        else:pass
-    else:pass
+        else:
+            pass
+    else:
+        pass
+
 
 @app.callback(Output('output-state', 'children'),
               [Input('login-button', 'n_clicks')],

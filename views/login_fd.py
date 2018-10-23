@@ -1,9 +1,9 @@
-#Dash configuration
+# Dash configuration
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output, State
+from dash.dependencies import Input, Output
 
-from server import _, app, server, LoginManager, UserMixin, login_user, login_required, logout_user, current_user, load_user, User
+from server import _, app
 
 # Create app layout
 layout = html.Div(children=[
@@ -37,8 +37,8 @@ layout = html.Div(children=[
     )
 ])
 
-# Create callbacks
 
+# Create callbacks
 @app.callback(Output('url_login_df', 'pathname'),
               [Input('back-button', 'n_clicks')])
 def logout_dashboard(n_clicks):
