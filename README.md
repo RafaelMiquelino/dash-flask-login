@@ -1,5 +1,7 @@
 # dash-flask-login
 
+![dash-flask-login](https://user-images.githubusercontent.com/31367475/47422577-4f761500-d759-11e8-90c2-b70a79fcd610.gif)
+
 This is an example of Flask-login implementation on top of a Dash application for users authentication.
 
 The example comes with users authentication through a sqlite3 database, however you can use your own database by changing the `con` parameter with your database URI in the `config.txt` file.
