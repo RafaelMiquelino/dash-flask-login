@@ -33,7 +33,8 @@ source venv/bin/activate
 
 2. `pip install -r requirements.txt`
 3. `flask run`
-4. open http://127.0.0.1:5000 in your browser
+4. open http://127.0.0.1:5000 in your browser or
+5. `flask run --host=0.0.0.0` to open for external connections
 
 ### Contributing
 
