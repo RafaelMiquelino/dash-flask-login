@@ -36,6 +36,13 @@ source venv/bin/activate
 4. open http://127.0.0.1:5000 in your browser or
 5. `flask run --host=0.0.0.0` or `gunicorn --bind 0.0.0.0:8000 wsgi:application` to open for external connections
 
+### Deployng to Heroku
+1. Install Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli
+2. Login to your heroku account: `heroku login`
+3. Create the app: `heroku create`
+4. Deploy to Heroku: `git push heroku master`
+5. Access the app via the address provided by Heroku
+
 ### Contributing
 
 PRs accepted! Please contribute if you believe this example can be improved.
