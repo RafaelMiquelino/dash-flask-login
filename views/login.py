@@ -18,11 +18,13 @@ layout = html.Div(
                     children=[
                         dcc.Input(
                             placeholder='Enter your username',
+                            n_submit=0,
                             type='text',
                             id='uname-box'
                         ),
                         dcc.Input(
                             placeholder='Enter your password',
+                            n_submit=0,
                             type='password',
                             id='pwd-box'
                         ),
@@ -42,10 +44,12 @@ layout = html.Div(
 
 
 @app.callback(Output('url_login', 'pathname'),
-              [Input('login-button', 'n_clicks')],
+              [Input('login-button', 'n_clicks'),
+              Input('uname-box', 'n_submit'),
+               Input('pwd-box', 'n_submit')],
               [State('uname-box', 'value'),
                State('pwd-box', 'value')])
-def sucess(n_clicks, input1, input2):
+def sucess(n_clicks, n_submit_uname, n_submit_pwd, input1, input2):
     user = User.query.filter_by(username=input1).first()
     if user:
         if check_password_hash(user.password, input2):
@@ -58,11 +62,13 @@ def sucess(n_clicks, input1, input2):
 
 
 @app.callback(Output('output-state', 'children'),
-              [Input('login-button', 'n_clicks')],
+              [Input('login-button', 'n_clicks'),
+               Input('uname-box', 'n_submit'),
+               Input('pwd-box', 'n_submit')],
               [State('uname-box', 'value'),
                State('pwd-box', 'value')])
-def update_output(n_clicks, input1, input2):
-    if n_clicks > 0:
+def update_output(n_clicks, n_submit_uname, n_submit_pwd, input1, input2):
+    if n_clicks > 0 or n_submit_uname > 0 or n_submit_pwd > 0:
         user = User.query.filter_by(username=input1).first()
         if user:
             if check_password_hash(user.password, input2):
