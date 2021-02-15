@@ -9,6 +9,7 @@ bkpMySQL
 run_gunicorn
 run_flask_server
 push_to_server
+.idea
 
 #Standard gitignore
 # Compiled source #
