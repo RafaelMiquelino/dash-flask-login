@@ -49,7 +49,7 @@ layout = html.Div(
                Input('pwd-box', 'n_submit')],
               [State('uname-box', 'value'),
                State('pwd-box', 'value')])
-def sucess(n_clicks, n_submit_uname, n_submit_pwd, input1, input2):
+def success(n_clicks, n_submit_uname, n_submit_pwd, input1, input2):
     user = User.query.filter_by(username=input1).first()
     if user:
         if check_password_hash(user.password, input2):
